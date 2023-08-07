@@ -15,12 +15,16 @@ class PlayerListTest(unittest.TestCase):
 
     def test_insert_head_when_empty(self):
         self.assertIsNone(self.player_list.head,
-                          "Head is not None")
+                          "player_list.head is not None")
+        self.assertIsNone(self.player_list.tail,
+                          "tail is not None")
 
         self.player_list.insert_head(self.player_node_1)
 
         self.assertEqual(self.player_list.head, self.player_node_1,
-                         "Head is not player_node_1")
+                         "player_list.head is not player_node_1")
+        self.assertEqual(self.player_list.tail, self.player_node_1,
+                         "player_list.tail is not player_node_1")
         self.assertIsNone(self.player_list.head.next,
                           "player_list.head.next is not None")
 
@@ -34,6 +38,13 @@ class PlayerListTest(unittest.TestCase):
                          "player_list.head.next is not player_node_1")
         self.assertEqual(self.player_list.head.next.previous, self.player_node_2,
                          "player_list.head.next.previous is not player_node_2")
+
+        self.assertEqual(self.player_list.tail, self.player_node_1,
+                         "player_list.tail is not player_node_2")
+        self.assertIsNone(self.player_list.tail.next,
+                          "player_list.tail.next is not player_node_1")
+        self.assertEqual(self.player_list.tail.previous, self.player_node_2,
+                         "player_list.tail.previous is not player_node_2")
 
 
 if __name__ == '__main__':
