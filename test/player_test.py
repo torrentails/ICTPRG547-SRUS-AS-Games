@@ -4,13 +4,17 @@ from app.player import Player
 
 
 class PlayerTest(unittest.TestCase):
-    def test_properties(self):
-        id = 'n357'
-        name = 'Casey'
-        player = Player(id, name)
+    def setUp(self) -> None:
+        self.player_id = 'n357'
+        self.player_name = 'Casey'
+        self.player = Player(self.player_id, self.player_name)
 
-        self.assertEqual(player.uid, id)
-        self.assertEqual(player.name, name)
+    def test_properties(self):
+
+        self.assertEqual(self.player.uid, self.player_id,
+                         f"player.uid is not {self.player_id}")
+        self.assertEqual(self.player.name, self.player_name,
+                         f"player.name is not {self.player_name}")
 
 
 if __name__ == '__main__':
