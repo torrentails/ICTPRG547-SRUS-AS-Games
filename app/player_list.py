@@ -11,19 +11,15 @@ class PlayerList:
     def head(self) -> PlayerNode | None:
         return self._head
 
-    @head.setter
-    def head(self, val: PlayerNode) -> None:
-        self._head = val
-
     def is_empty(self) -> bool:
         return self._head is None
 
     def insert_head(self, node: PlayerNode) -> None:
         if self.is_empty():
-            self.head = node
+            self._head = node
             return
 
         old_head = self.head
-        self.head = node
+        self._head = node
         node.next = old_head
         old_head.previous = node
