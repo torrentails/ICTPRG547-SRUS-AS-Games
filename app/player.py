@@ -16,8 +16,3 @@ class Player:
 
     def __str__(self) -> str:
         return f"{self.__class__.__name__}({self.uid}, {self.name})"
-
-
-if __name__ == '__main__':
-    p = Player('a123', 'Casey')
-    print(p)
