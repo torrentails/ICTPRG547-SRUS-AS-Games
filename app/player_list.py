@@ -1,4 +1,3 @@
-from app.player import Player
 from app.player_node import PlayerNode
 
 
@@ -40,9 +39,26 @@ class PlayerList:
         node.previous.next = node
         self._tail = node
 
+    def get(self, index: int) -> PlayerNode:
+        current_node = self.head
+        for idx in range(index):
+            try:
+                current_node = current_node.next
+            except AttributeError:
+                break
+
+        if current_node is None:
+            raise IndexError("Index out of bounds")
+
+        return current_node
+
     def del_head(self):
         if self.is_empty():
             raise IndexError("Index out of bounds")
+
+        if self.head == self.tail:
+            self._head = self._tail = None
+            return
 
         self._head = self.head.next
         if self.head:
@@ -52,6 +68,24 @@ class PlayerList:
         if self.is_empty():
             raise IndexError("Index out of bounds")
 
+        if self.head == self.tail:
+            self._head = self._tail = None
+            return
+
         self._tail = self.tail.previous
         if self.tail:
             self.tail.next = None
+
+    def delete(self, index: int) -> None:
+        node_to_del = self.get(index)
+        if node_to_del == self.head:
+            self._head = node_to_del.next
+
+        if node_to_del == self.tail:
+            self._tail = node_to_del.previous
+
+        if node_to_del.previous:
+            node_to_del.previous.next = node_to_del.next
+
+        if node_to_del.next:
+            node_to_del.next.previous = node_to_del.previous
