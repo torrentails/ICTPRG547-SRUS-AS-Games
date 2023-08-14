@@ -64,6 +64,18 @@ class PlayerList:
         if self.head:
             self.head.previous = None
 
+    def display(self, forward: bool = True) -> None:
+        nodes = []
+        current_node = self.head
+        while current_node:
+            nodes.append(current_node)
+            current_node = current_node.next
+
+        if forward is False:
+            nodes.reverse()
+
+        [print(node) for node in nodes]
+
     def del_tail(self):
         if self.is_empty():
             raise IndexError("Index out of bounds")
