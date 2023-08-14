@@ -1,14 +1,14 @@
 class Player:
-    _id: str
+    _uid: str
     _name: str
 
-    def __init__(self, id: str, name: str):
-        self._id = id
+    def __init__(self, uid: str, name: str):
+        self._uid = uid
         self._name = name
 
     @property
     def uid(self) -> str:
-        return self._id
+        return self._uid
 
     @property
     def name(self) -> str:
