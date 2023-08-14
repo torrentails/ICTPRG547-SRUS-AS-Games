@@ -77,6 +77,20 @@ class PlayerListTest(unittest.TestCase):
         self.assertEqual(self.player_list.tail.previous, self.player_node_1,
                          "player_list.tail.previous is not player_node_1")
 
+    def test_delete_head(self):
+        self.player_list.insert_head(self.player_node_1)
+        self.assertEqual(self.player_list.head, self.player_node_1)
+
+        self.player_list.del_head()
+        self.assertRaises(IndexError, self.player_list.del_head)
+
+    def test_delete_tail(self):
+        self.player_list.insert_tail(self.player_node_2)
+        self.assertEqual(self.player_list.tail, self.player_node_2)
+
+        self.player_list.del_tail()
+        self.assertRaises(IndexError, self.player_list.del_tail)
+
 
 if __name__ == '__main__':
     unittest.main()

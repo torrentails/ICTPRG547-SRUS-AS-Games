@@ -33,7 +33,6 @@ class PlayerList:
 
     def insert_tail(self, node: PlayerNode) -> None:
         if self.is_empty():
-            # self.insert_head(node)
             self.insert_head(node)
             return
 
@@ -41,3 +40,18 @@ class PlayerList:
         node.previous.next = node
         self._tail = node
 
+    def del_head(self):
+        if self.is_empty():
+            raise IndexError("Index out of bounds")
+
+        self._head = self.head.next
+        if self.head:
+            self.head.previous = None
+
+    def del_tail(self):
+        if self.is_empty():
+            raise IndexError("Index out of bounds")
+
+        self._tail = self.tail.previous
+        if self.tail:
+            self.tail.next = None
