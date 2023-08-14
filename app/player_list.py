@@ -1,3 +1,4 @@
+from app.player import Player
 from app.player_node import PlayerNode
 
 
@@ -26,7 +27,17 @@ class PlayerList:
             self._tail = node
             return
 
-        old_head = self.head
+        node.next = self.head
+        node.next.previous = node
         self._head = node
-        node.next = old_head
-        old_head.previous = node
+
+    def insert_tail(self, node: PlayerNode) -> None:
+        if self.is_empty():
+            # self.insert_head(node)
+            self.insert_head(node)
+            return
+
+        node.previous = self.tail
+        node.previous.next = node
+        self._tail = node
+
