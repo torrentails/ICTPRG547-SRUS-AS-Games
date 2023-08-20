@@ -1,13 +1,29 @@
+from collections.abc import Iterable
+from typing import Iterator
+
 from app.player_node import PlayerNode
 
 
-class PlayerList:
+class PlayerList(Iterable):
     _head: PlayerNode | None
     _tail: PlayerNode | None
 
     def __init__(self):
         self._head = None
         self._tail = None
+
+    def __iter__(self) -> Iterator[PlayerNode]:
+        def iterator():
+            current_node = self.head
+            while True:
+                if current_node is None:
+                    return
+
+                yield current_node
+
+                current_node = current_node.next
+
+        return (node for node in iterator())
 
     @property
     def head(self) -> PlayerNode | None:
