@@ -27,7 +27,7 @@ class PlayerNode:
         Parameters
         ----------
         player
-            The `Player` to wrap
+            The `Player` object to wrap
         """
         self._player = player
         self._previous = None

@@ -65,7 +65,7 @@ class PlayerList:
         self._tail = node
 
     def get(self, index: int) -> PlayerNode:
-        """Gets the node at a given index
+        """Gets the `PlayerNode` at a given index
 
         Parameters
         ----------
@@ -96,6 +96,13 @@ class PlayerList:
         return current_node
 
     def display(self, forward: bool = True) -> None:
+        """Prints the list of nodes in a human-readable format
+
+        Parameters
+        ----------
+        forward
+            if false, the nodes are printed in reverse
+        """
         nodes = []
         current_node = self.head
         while current_node:
@@ -108,6 +115,14 @@ class PlayerList:
         [print(node) for node in nodes]
 
     def del_head(self):
+        """Deletes the head node and sets the next
+        node as the head (if it exists)
+
+        Raises
+        ------
+        IndexError
+            if the list is empty
+        """
         if self.is_empty():
             raise IndexError("Index out of bounds")
 
@@ -120,6 +135,14 @@ class PlayerList:
             self.head.previous = None
 
     def del_tail(self):
+        """Deletes the tail node and sets the previous
+        node as the tail (if it exists)
+
+        Raises
+        ------
+        IndexError
+            if the list is empty
+        """
         if self.is_empty():
             raise IndexError("Index out of bounds")
 
@@ -132,6 +155,19 @@ class PlayerList:
             self.tail.next = None
 
     def delete(self, index: int) -> None:
+        """Deletes the node at a given index, adjusting
+        the next and previous nodes to fill the gap
+
+        Parameters
+        ----------
+        index
+            the index of the node to delete
+
+        Raises
+        ------
+        IndexError
+            if no node is at the given index
+        """
         node_to_del = self.get(index)
         if node_to_del == self.head:
             self._head = node_to_del.next
