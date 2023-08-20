@@ -4,11 +4,31 @@ from app.player import Player
 
 
 class PlayerNode:
+    """Node to contain a `Player` for use in a `PlayerList`
+
+    Attributes
+    ----------
+    player
+        the wrapped `Player` object
+    next
+        reference to the next `PlayerNode`
+    previous
+        reference to the previous `PlayerNode`
+    key
+        returns the uid of the wrapped `Player`
+    """
+    
     _player: Player
     _previous: Optional["PlayerNode"]
     _next: Optional["PlayerNode"]
 
     def __init__(self, player: Player):
+        """
+        Parameters
+        ----------
+        player
+            The `Player` object to wrap
+        """
         self._player = player
         self._previous = None
         self._next = None

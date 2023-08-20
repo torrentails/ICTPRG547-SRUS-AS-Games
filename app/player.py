@@ -1,14 +1,34 @@
 class Player:
-    _id: str
+    """Represents a player with a name and an id
+
+    Intended to non-mutable; a dataclass would probably be better.
+
+    Attributes
+    ----------
+    uid
+        The uid of the player
+    name
+        the name of the player
+    """
+
+    _uid: str
     _name: str
 
-    def __init__(self, id: str, name: str):
-        self._id = id
+    def __init__(self, uid: str, name: str):
+        """
+        Parameters
+        ----------
+        uid
+            The uid of the player
+        name : str
+            The name of the player
+        """
+        self._uid = uid
         self._name = name
 
     @property
     def uid(self) -> str:
-        return self._id
+        return self._uid
 
     @property
     def name(self) -> str:
