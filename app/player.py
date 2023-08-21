@@ -61,5 +61,24 @@ class Player:
         hasher = PasswordHasher()
         self._password_hash = hasher.hash(password, salt=self._password_salt)
 
+    def verify_password(self, password: str) -> bool:
+        """Generates a hash of `password` and compares it to the stored password hash
+
+        Parameters
+        ----------
+        password
+            the password to check the hash of
+
+        Raises
+        ------
+        RuntimeError
+            if the password has not been set, and so there is nothing to compare to
+        """
+        if self._password_hash is None:
+            raise RuntimeError("No password has been set. Use Player.add_password first")
+
+        hasher = PasswordHasher()
+        return hasher.hash(password, salt=self._password_salt) == self._password_hash
+
     def __str__(self) -> str:
         return f"{self.__class__.__name__}({self.uid}, {self.name})"
