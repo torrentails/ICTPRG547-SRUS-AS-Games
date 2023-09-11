@@ -83,16 +83,16 @@ class PlayerListTest(unittest.TestCase):
         self.assertEqual(self.player_list.head, self.player_node_1,
                          "player_list.head is not player_node_1")
 
-        self.player_list.del_head()
-        self.assertRaises(IndexError, self.player_list.del_head)
+        self.player_list.delete_head()
+        self.assertRaises(IndexError, self.player_list.delete_head)
 
     def test_delete_tail(self):
         self.player_list.insert_tail(self.player_node_1)
         self.assertEqual(self.player_list.tail, self.player_node_1,
                          "player_list.tail is not player_node_1")
 
-        self.player_list.del_tail()
-        self.assertRaises(IndexError, self.player_list.del_tail)
+        self.player_list.delete_tail()
+        self.assertRaises(IndexError, self.player_list.delete_tail)
 
     def test_delete_index_0(self):
         self.assertRaises(IndexError, self.player_list.delete, 0)

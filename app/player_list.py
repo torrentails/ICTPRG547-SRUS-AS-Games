@@ -114,7 +114,7 @@ class PlayerList:
 
         [print(node) for node in nodes]
 
-    def del_head(self):
+    def delete_head(self):
         """Deletes the head node and sets the next
         node as the head (if it exists)
 
@@ -134,7 +134,7 @@ class PlayerList:
         if self.head:
             self.head.previous = None
 
-    def del_tail(self):
+    def delete_tail(self):
         """Deletes the tail node and sets the previous
         node as the tail (if it exists)
 
