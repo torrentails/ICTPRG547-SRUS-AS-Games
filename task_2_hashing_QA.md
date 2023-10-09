@@ -1,8 +1,8 @@
 # Portfolio Task 2 - Hashing
 
-1. In your own words, describe what hashing is in general. (40 - 70 words)
+1. In your own words, describe what hashing is in general.
     
-    Hashing is the process of mapping a sequence of data to 
+    Hashing is the process using a hash function, which maps a given input sequence of data to a consistently repeatable value. i.e. The same input data should always return the same hash value
 
 2. Research hashing algorithms. Describe advantages and disadvantages for at least three different hashing algorithms. Please provide references for external resources. (60-100 words)
 
