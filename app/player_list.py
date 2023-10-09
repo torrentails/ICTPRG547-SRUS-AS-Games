@@ -114,45 +114,63 @@ class PlayerList:
 
         [print(node) for node in nodes]
 
-    def delete_head(self):
-        """Deletes the head node and sets the next
+    def pop_left(self) -> PlayerNode:
+        """Removes and returns the head node and sets the next
         node as the head (if it exists)
 
         Raises
         ------
         IndexError
             if the list is empty
+
+        Returns
+        -------
+        PlayerNode
+            the node removed from the beginning of the list
         """
         if self.is_empty():
             raise IndexError("Index out of bounds")
 
+        retval = self._head
+
         if self.head == self.tail:
             self._head = self._tail = None
-            return
 
-        self._head = self.head.next
-        if self.head:
-            self.head.previous = None
+        else:
+            self._head = self.head.next
+            if self.head:
+                self.head.previous = None
 
-    def delete_tail(self):
-        """Deletes the tail node and sets the previous
+        return retval
+
+    def pop(self) -> PlayerNode:
+        """Removes and returns the tail node and sets the previous
         node as the tail (if it exists)
 
         Raises
         ------
         IndexError
             if the list is empty
+
+        Returns
+        -------
+        PlayerNode
+            the node removed from the end of the list
         """
         if self.is_empty():
             raise IndexError("Index out of bounds")
 
+        retval = self._tail
+
         if self.head == self.tail:
             self._head = self._tail = None
-            return
 
-        self._tail = self.tail.previous
-        if self.tail:
-            self.tail.next = None
+        else:
+            self._tail = self.tail.previous
+            if self.tail:
+                self.tail.next = None
+
+        return retval
 
     def delete(self, index: int) -> None:
         """Deletes the node at a given index, adjusting

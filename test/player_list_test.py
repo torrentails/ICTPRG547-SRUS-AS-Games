@@ -78,21 +78,25 @@ class PlayerListTest(unittest.TestCase):
         self.assertEqual(self.player_list.tail.previous, self.player_node_1,
                          "player_list.tail.previous is not player_node_1")
 
-    def test_delete_head(self):
+    def test_pop_left(self):
         self.player_list.insert_head(self.player_node_1)
         self.assertEqual(self.player_list.head, self.player_node_1,
                          "player_list.head is not player_node_1")
 
-        self.player_list.delete_head()
-        self.assertRaises(IndexError, self.player_list.delete_head)
+        head_node = self.player_list.pop_left()
+        self.assertEqual(head_node, self.player_node_1,
+                         "popped node is not player_node_1")
+        self.assertRaises(IndexError, self.player_list.pop_left)
 
-    def test_delete_tail(self):
+    def test_pop(self):
         self.player_list.insert_tail(self.player_node_1)
         self.assertEqual(self.player_list.tail, self.player_node_1,
                          "player_list.tail is not player_node_1")
 
-        self.player_list.delete_tail()
-        self.assertRaises(IndexError, self.player_list.delete_tail)
+        tail_node = self.player_list.pop()
+        self.assertEqual(tail_node, self.player_node_1,
+                         "popped node is not player_node_1")
+        self.assertRaises(IndexError, self.player_list.pop)
 
     def test_delete_index_0(self):
         self.assertRaises(IndexError, self.player_list.delete, 0)
