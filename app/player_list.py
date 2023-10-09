@@ -64,37 +64,6 @@ class PlayerList:
         node.previous.next = node
         self._tail = node
 
-    def get(self, index: int) -> PlayerNode:
-        """Gets the `PlayerNode` at a given index
-
-        Parameters
-        ----------
-        index
-            the index of the node to get
-
-        Returns
-        -------
-        PlayerNode
-            the node at the given index
-
-        Raises
-        ------
-        IndexError
-            if no node is at the given index
-        """
-
-        current_node = self.head
-        for idx in range(index):
-            try:
-                current_node = current_node.next
-            except AttributeError:
-                break
-
-        if current_node is None:
-            raise IndexError("Index out of bounds")
-
-        return current_node
-
     def display(self, forward: bool = True) -> None:
         """Prints the list of nodes in a human-readable format
 
@@ -114,69 +83,72 @@ class PlayerList:
 
         [print(node) for node in nodes]
 
-    def del_head(self):
-        """Deletes the head node and sets the next
-        node as the head (if it exists)
-
-        Raises
-        ------
-        IndexError
-            if the list is empty
-        """
-        if self.is_empty():
-            raise IndexError("Index out of bounds")
-
-        if self.head == self.tail:
-            self._head = self._tail = None
-            return
-
-        self._head = self.head.next
-        if self.head:
-            self.head.previous = None
-
-    def del_tail(self):
-        """Deletes the tail node and sets the previous
-        node as the tail (if it exists)
-
-        Raises
-        ------
-        IndexError
-            if the list is empty
-        """
-        if self.is_empty():
-            raise IndexError("Index out of bounds")
-
-        if self.head == self.tail:
-            self._head = self._tail = None
-            return
-
-        self._tail = self.tail.previous
-        if self.tail:
-            self.tail.next = None
-
-    def delete(self, index: int) -> None:
-        """Deletes the node at a given index, adjusting
+    def pop(self, index: int = None) -> PlayerNode:
+        """Removes and returns the node at a given index, adjusting
         the next and previous nodes to fill the gap
 
         Parameters
         ----------
         index
-            the index of the node to delete
+            the index of the node to pop.
+            If None, then the tail node is popped
+
+        Returns
+        -------
+        PlayerNode
+            the node removed from the indicated position of the list
 
         Raises
         ------
         IndexError
             if no node is at the given index
         """
-        node_to_del = self.get(index)
-        if node_to_del == self.head:
-            self._head = node_to_del.next
+        if self.is_empty():
+            raise IndexError("Index out of bounds")
 
-        if node_to_del == self.tail:
-            self._tail = node_to_del.previous
+        if index is None:
+            node_to_pop = self.tail
 
-        if node_to_del.previous:
-            node_to_del.previous.next = node_to_del.next
+        else:
+            node_to_pop = self.head
+            for idx in range(index):
+                try:
+                    node_to_pop = node_to_pop.next
+                except AttributeError:
+                    break
 
-        if node_to_del.next:
-            node_to_del.next.previous = node_to_del.previous
+        if node_to_pop is None:
+            raise IndexError("Index out of bounds")
+
+        if node_to_pop == self.head:
+            self._head = node_to_pop.next
+
+        if node_to_pop == self.tail:
+            self._tail = node_to_pop.previous
+
+        if node_to_pop.previous:
+            node_to_pop.previous.next = node_to_pop.next
+
+        if node_to_pop.next:
+            node_to_pop.next.previous = node_to_pop.previous
+
+        return node_to_pop
+
+    def pop_left(self) -> PlayerNode:
+        """Removes and returns the head node and sets the next
+        node as the head (if it exists)
+
+        Raises
+        ------
+        IndexError
+            if the list is empty
+
+        Returns
+        -------
+        PlayerNode
+            the node removed from the beginning of the list
+        """
+        if self.is_empty():
+            raise IndexError("Index out of bounds")
+
+        return self.pop(0)

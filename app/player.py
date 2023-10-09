@@ -80,5 +80,8 @@ class Player:
         hasher = PasswordHasher()
         return hasher.hash(password, salt=self._password_salt) == self._password_hash
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.uid}, {self.name})"
+
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__}, user_id: {self.uid}, user_name: {self.name}"
