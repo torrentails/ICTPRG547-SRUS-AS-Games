@@ -125,13 +125,13 @@ class PlayerListTest(unittest.TestCase):
                          "player_list.head is not player_node_1")
         self.assertEqual(self.player_list.tail, self.player_node_3,
                          "player_list.tail is not player_node_3")
-        self.assertEqual(self.player_list.get(1), self.player_node_3,
+        self.assertEqual(self.player_list[1], self.player_node_3,
                          "player_list.get(1) is not player_node_3")
 
         self.player_list.delete(1)
         self.assertEqual(self.player_list.tail, self.player_node_1,
                          "player_list.tail is not player_node_1")
-        self.assertRaises(IndexError, self.player_list.get, 1)
+        self.assertRaises(IndexError, self.player_list.__getitem__, 1)
 
 
 if __name__ == '__main__':

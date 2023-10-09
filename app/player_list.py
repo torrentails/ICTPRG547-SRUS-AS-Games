@@ -19,6 +19,23 @@ class PlayerList:
         self._head = None
         self._tail = None
 
+    def __getitem__(self, index: int) -> PlayerNode:
+        if index < 0:
+            raise NotImplemented(f"{self.__class__.__name__}"
+                                 "does not currently support negative indexing")
+
+        current_node = self.head
+        for idx in range(index):
+            try:
+                current_node = current_node.next
+            except AttributeError:
+                break
+
+        if current_node is None:
+            raise IndexError("Index out of bounds")
+
+        return current_node
+
     @property
     def head(self) -> PlayerNode | None:
         return self._head
@@ -186,7 +203,7 @@ class PlayerList:
         IndexError
             if no node is at the given index
         """
-        node_to_del = self.get(index)
+        node_to_del = self[index]
         if node_to_del == self.head:
             self._head = node_to_del.next
 
